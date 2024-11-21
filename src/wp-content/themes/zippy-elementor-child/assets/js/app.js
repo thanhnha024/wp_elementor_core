@@ -1,16 +1,37 @@
-// import { DisplayLabel } from './components/DisplayLabel';
+$(document).ready(function ($) {
+  //Trigger next button
+  handleStep1();
+  handleStep2();
+  function handleStep1() {
+    const discribes_button = $(".elementor-field-group-industry")
+      .children(".elementor-field-subgroup")
+      .find("label");
 
-let Main = {
-  init: async function () {
-
-    // initialize demo javascript component - async/await invokes some 
-    //  level of babel transformation 
-    const displayLabel = new DisplayLabel();
-    await displayLabel.init();
-
+    discribes_button.each((index, ele) => {
+      $(ele).on("click", function () {
+        // console.log($(this));
+        $(".elementor-field-group-step_1")
+          .find(".e-form__buttons__wrapper__button-next")
+          .trigger("click");
+      });
+    });
   }
-};
 
+  function handleStep2() {
+    const discribes_button = $(".elementor-field-group-increase_sales")
+      .children(".elementor-field-subgroup")
+      .find("label");
 
-console.log($('.more-link'));
-// Main.init();
+    discribes_button.each((index, ele) => {
+      $(ele).on("click", function () {
+        console.log($(this));
+        $(".elementor-field-group-step_2")
+          .find(".e-form__buttons__wrapper__button-next")
+          .trigger("click");
+      });
+    });
+  }
+
+  // Run the function after 3 seconds (3000 milliseconds)
+  // setTimeout(myFunction, 1000);
+});
