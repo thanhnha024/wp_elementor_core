@@ -22,6 +22,8 @@ src/wp-content/plugins/akismet
 
 src/wp-content/plugins/hello.php
 
+# Ignore Zippy plugins Package
+
 # Ignore themes default
 src/wp-content/themes/twentytwentyone
 
