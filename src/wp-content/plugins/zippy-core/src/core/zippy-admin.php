@@ -35,7 +35,7 @@ class Zippy_Admin
 		add_action('admin_init', [$this, 'hide_acf_options_menu'], 99);
 
 		//Disable search engines from indexing this site (Only for staging domain)
-		// add_action('admin_init', [$this, 'disable_search_engine_indexing']);
+		//add_action('admin_init', [$this, 'disable_search_engine_indexing']);
 
 		/*  Disable All Update Notifications with Code  */
 
@@ -44,6 +44,8 @@ class Zippy_Admin
 		add_filter('site_transient_update_plugins', [$this, 'allow_only_zippy_updates']);
 
 		add_filter('pre_site_transient_update_themes', [$this, 'remove_core_updates']);
+
+		add_action('admin_enqueue_scripts', [$this, 'build_admin_scripts_and_styles']);
 	}
 
 	public function shin_change_footer_text()
@@ -94,5 +96,25 @@ class Zippy_Admin
 		}
 
 		return $value;
+	}
+
+
+	public function build_admin_scripts_and_styles()
+	{
+		$version = time();
+		$current_user_id = get_current_user_id();
+
+		// Pass the user ID to the script
+		wp_enqueue_script('core-admin-scripts', ZIPPY_CORE_URL . '/assets/dist/js/admin.min.js', [], $version, true);
+		wp_enqueue_style('core-admin-styles', ZIPPY_CORE_URL . '/assets/dist/css/admin.min.css', [], $version);
+
+		wp_localize_script('core-admin-scripts', 'admin_id', array(
+			'userID' => $current_user_id,
+		));
+
+		wp_localize_script('core-admin-scripts', 'core_admin_api', array(
+			'url' => esc_url_raw(rest_url(ZIPPY_CORE_API_PREFIX)),
+			'nonce'  => wp_create_nonce('wp_rest'),
+		));
 	}
 }
