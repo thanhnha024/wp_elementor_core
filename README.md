@@ -23,3 +23,29 @@ Various build commands are available that execute the webpack 5 builds:
 ## Deploying the Theme
 
 This theme can be downloaded and deployed into a WordPress instance's themes directory (i.e. `/wp-content/themes`). Once the theme is deployed, run the build commands (`npm install` and `npm run dist`) to install and build the JavaScript and CSS.
+
+
+## Structure
+
+ZIPPY_THEME/
+│
+├── functions.php
+├── inc/                    =>>> Hook, PHP FILE
+│   ├── hooks/
+│   │     ├── cart-hooks.php
+│   │     └── checkout-hooks.php
+│   ├── helpers/
+│   │     └── utils.php
+│   ├── api/
+│   │     └── rest-routes.php
+│   └── features/
+│         └── product-combo.php
+└── app/                    =>>> Class, PHP Class
+    ├── Controllers/
+    │     └── ProductController.php
+    ├── Models/
+    │     └── Product.php
+    ├── Services/
+    │     └── ComboService.php
+    └── App.php    └── product-combo.php
+
