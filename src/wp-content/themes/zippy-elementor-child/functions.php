@@ -13,9 +13,9 @@ if (!defined('THEME_URL'))
     define('THEME_URL', get_template_directory_uri());
 
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 
 /**
@@ -24,12 +24,3 @@ error_reporting(E_ALL);
  */
 
 require_once THEME_DIR_CHILD . '/includes/autoload.php';
-
-/*
- * Include framework files
- */
-// foreach (glob(THEME_DIR . '-child' . "/includes/*.php") as $file_name) {
-//     require_once($file_name);
-// }
-
-// echo 'shin';
