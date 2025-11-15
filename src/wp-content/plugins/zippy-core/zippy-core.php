@@ -3,7 +3,7 @@
 Plugin Name: ZippySG Core
 Plugin URI: https://zippy.sg/
 Description: Support change default URL Admin, provide Advanced Analytics Woocommrece, Remove thirt party default of Wordpress, Setting SMTP Mail Server, Optime Wordpress Core...
-Version: 7.0
+Version: 8.0
 Author: Zippy SG
 Author URI: https://zippy.sg/
 License: GNU General Public
@@ -17,6 +17,7 @@ Copyright 2024
 
 namespace Zippy_Core;
 
+use Zippy_Core\Src\Admin\Orders\Zippy_Admin_Orders;
 use Zippy_Core\Src\Core\Zippy_Activate;
 
 defined('ABSPATH') or die('°_°’');
@@ -56,6 +57,13 @@ if (!defined('ZIPPY_CORE_URL')) {
   define('ZIPPY_CORE_URL', plugin_dir_url(__FILE__));
 }
 
+/* Set API prefix url */
+
+if (!defined('ZIPPY_CORE_API_PREFIX')) {
+  define('ZIPPY_CORE_API_PREFIX', 'zippy-core/v2');
+}
+
+
 /* ------------------------------------------
 // i18n
 ---------------------------- --------------------------------------------- */
@@ -89,13 +97,7 @@ use Zippy_Core\Src\User\Zippy_MPDA_Consent;
 use Zippy_Core\Src\User\Zippy_User_Account_Expiry;
 
 use Zippy_Core\Src\Analytics\Zippy_Analytics;
-
 use Zippy_Core\Src\Woocommerce\Zippy_Woocommerce;
-
-use Zippy_Core\Src\Woocommerce\Zippy_Postal_code;
-
-use YahnisElsts\PluginUpdateChecker\v5p6\PucFactory;
-
 
 /**
  *
@@ -116,4 +118,17 @@ Zippy_Analytics::get_instance();
 
 Zippy_Woocommerce::get_instance();
 
-Zippy_Postal_code::get_instance();
+
+/**
+ * Zippy Core V2: Import modules
+ */
+
+require_once ZIPPY_CORE_DIR_PATH . 'src/modules/route.php';
+require_once ZIPPY_CORE_DIR_PATH . 'src/modules/module.php';
+require_once ZIPPY_CORE_DIR_PATH . 'src/modules/middleware.php';
+require_once ZIPPY_CORE_DIR_PATH . 'src/modules/autoload-modules.php';
+
+//Autoload modules
+if (class_exists(Core_Autoload_Module::class)) {
+  Core_Autoload_Module::init();
+}
