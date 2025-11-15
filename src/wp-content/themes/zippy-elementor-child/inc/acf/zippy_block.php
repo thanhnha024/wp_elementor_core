@@ -1,5 +1,6 @@
 <?php
 /*
+ *
  * Create blocks for site
  */
 add_filter('block_categories_all', 'shin_block_category', 10, 2);
