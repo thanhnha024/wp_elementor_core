@@ -23,4 +23,4 @@ if (!defined('THEME_URL'))
  * Include Autoload file
  */
 
-require_once THEME_DIR_CHILD . '/includes/autoload.php';
+require_once THEME_DIR_CHILD . '/autoload.php';
